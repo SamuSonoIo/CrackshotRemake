@@ -14,4 +14,4 @@ Messages:
 
   notifications:
     cooldown-active: "§cYour §3{gun} §cis cooling down. Please wait before using it again."
-    reload-complete: "§aReload complete! Your §3{gun} §7is ready to fire."
+    reload-complete: "§aReload complete! Your §3{gun} §7is ready to fire. TEST!!"
