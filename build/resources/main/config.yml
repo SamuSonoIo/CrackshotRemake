@@ -1,0 +1,17 @@
+Prefix: "§4[CS] §7"
+
+Messages:
+  success:
+    obtained: "You successfully received §3{gun} §e(x{quantity})! Use it wisely."
+    gave-gun: "You have given §3{gun} §7to §e{target}§7. Happy shooting!"
+    reloaded: "Configuration files have been reloaded successfully."
+  error:
+    no-permission: "§cYou do not have permission to perform this action."
+    player-not-found: "§cCould not find the player §e{target}. Make sure the name is correct!"
+    gun-not-found: "§cThe weapon §e{gun} §cdoes not exist in the database."
+    invalid-quantity: "§cInvalid quantity: §e{quantity}. Please enter a positive number."
+    file-error: "§cAn error occurred while accessing the file. Please check the console."
+
+  notifications:
+    cooldown-active: "§cYour §3{gun} §cis cooling down. Please wait before using it again."
+    reload-complete: "§aReload complete! Your §3{gun} §7is ready to fire."
