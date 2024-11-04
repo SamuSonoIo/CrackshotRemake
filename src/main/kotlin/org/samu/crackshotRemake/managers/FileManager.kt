@@ -7,8 +7,8 @@ import org.bukkit.entity.EntityType
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.samu.crackshotRemake.CrackshotRemake
-import org.samu.crackshotRemake.gunsettings.enums.FirearmTypes
 import org.samu.crackshotRemake.gunsettings.enums.ProjectileTypes
+import org.samu.crackshotRemake.gunsettings.enums.ShotKey
 import org.samu.crackshotRemake.instances.Weapon
 import java.io.File
 import java.util.*
@@ -53,6 +53,7 @@ object FileManager {
             val itemType = Material.valueOf(itemTypeString)
             val lore = weaponSection.getString("Item_Information.Item_Lore") ?: ""
             val soundAcquired = Sound.valueOf(weaponSection.getString("Item_Information.Sounds_Acquired")!!.split("-")[0])
+            val shotKey:ShotKey = ShotKey.valueOf(weaponSection.getString("Shooting.Shot_KEY"))
             val itemStack = ItemStack(itemType)
             val meta: ItemMeta = itemStack.itemMeta ?: continue
             meta.displayName = displayName
@@ -74,7 +75,6 @@ object FileManager {
             val reloadDuration = weaponSection.getInt("Reload.Reload_Duration")
             val soundsReloading = Sound.valueOf(weaponSection.getString("Reload.Sounds_Reloading")!!.split("-")[0])
 
-            val firearmActionType = weaponSection.getString("Firearm_Action.Type") ?: "PUMP"
             val openDuration = weaponSection.getInt("Firearm_Action.Open_Duration")
             val closeDuration = weaponSection.getInt("Firearm_Action.Close_Duration")
             val soundOpen = Sound.valueOf(weaponSection.getString("Firearm_Action.Sound_Open")!!.split("-")[0])
@@ -106,9 +106,9 @@ object FileManager {
                 type = itemType,
                 soundAcquired = soundAcquired,
                 description = lore,
+                shotKey = shotKey,
                 projectileType = projectileType,
                 projectileSpeed = projectileSpeed,
-                firearmType = FirearmTypes.valueOf(firearmActionType),
                 projectileDamage = projectileDamage,
                 projectileAmount = projectileAmount,
                 projectileSubtype = projectileSubtype,

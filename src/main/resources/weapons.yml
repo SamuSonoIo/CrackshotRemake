@@ -5,6 +5,7 @@ Razziatore:
     Item_Lore: "Arma capace di trapassare tutti i tipi di nemici"
     Sounds_Acquired: BLOCK_ANVIL_USE
   Shooting:
+    Shot_KEY: LEFT_CLICK
     Cancel_Left_Click_Block_Damage: true
     Cancel_Right_Click_Interactions: true
     Projectile_Amount: 1
@@ -20,7 +21,6 @@ Razziatore:
     Reload_Duration: 10
     Sounds_Reloading: BLOCK_ANVIL_USE
   Firearm_Action:
-    Type: PUMP
     Open_Duration: 12
     Close_Duration: 3
     Sound_Open: BLOCK_ANVIL_USE

@@ -13,7 +13,10 @@ class InteractEvent : Listener {
         val player:Player = e.player
         val weapon: Weapon? = CrackshotRemake.gunManager?.getWeaponInHand(player)
         if (weapon != null) {
-            CrackshotRemake.gunManager?.shootGun(player, weapon)
+            CrackshotRemake.gunManager?.shootGun(weapon, e)
+            if (CrackshotRemake.gunManager?.cancelRightClickBlockInteraction(weapon) == true) {
+                e.isCancelled = true
+            }
         }
     }
 }

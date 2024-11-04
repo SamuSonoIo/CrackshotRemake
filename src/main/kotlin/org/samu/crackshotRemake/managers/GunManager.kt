@@ -1,7 +1,11 @@
 import de.tr7zw.changeme.nbtapi.NBTItem
 import org.bukkit.Sound
 import org.bukkit.entity.Player
+import org.bukkit.event.block.Action
+import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import org.samu.crackshotRemake.CrackshotRemake
 import org.samu.crackshotRemake.instances.Weapon
 import org.samu.crackshotRemake.managers.CacheManager
@@ -32,11 +36,24 @@ class GunManager(val crackshotRemake: CrackshotRemake) {
         return nbtItem.item
     }
 
-    fun shootGun(player: Player, weapon: Weapon) {
-        LaunchProjectile.shootProjectile(player, weapon)
-        CacheManager.getWeapon(weapon.id)?.reloadAmount = CacheManager.getWeapon(weapon.id)?.reloadAmount?.minus(1)!!
-        for (string in weapon.soundsShoot) {
-            player.playSound(player.getLocation(), string, 1.0f, 1.0f)
+    fun shootGun(weapon: Weapon, e: PlayerInteractEvent) {
+        val player:Player = e.player
+        if (canUseWeapon(weapon, player)) {
+            LaunchProjectile.shootProjectile(player, weapon)
+            removeAmmo(weapon)
+            for (string in weapon.soundsShoot) {
+                player.playSound(player.location, string, 1.0f, 1.0f)
+            }
+        }
+
+        if (scope(weapon) && (e.action.equals(Action.LEFT_CLICK_BLOCK) || e.action.equals(Action.LEFT_CLICK_AIR))) {
+            if (CacheManager.scopeActive(player)) {
+                player.removePotionEffect(PotionEffectType.SLOW)
+                CacheManager.removeScope(player)
+            } else {
+                CacheManager.setScope(player)
+                player.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 99999, 1, true, false))
+            }
         }
     }
 
@@ -50,4 +67,16 @@ class GunManager(val crackshotRemake: CrackshotRemake) {
         }
         player.sendMessage("Arma non trovata: $name")
     }
+
+    fun removeAmmo(weapon: Weapon) {
+        if (weapon.projectilsCurrentAmount > 0) {
+            weapon.projectilsCurrentAmount -= 1
+            println("Current Ammo: " + weapon.reloadAmount)
+        } else{
+            weapon.projectilsCurrentAmount = weapon.projectileAmount
+        }
+    }
+
+    fun scope(weapon: Weapon):Boolean { return weapon.scopeEnabled }
+    fun cancelRightClickBlockInteraction(weapon: Weapon):Boolean { return weapon.cancelRightClickInteractions }
 }
