@@ -7,9 +7,9 @@ import org.bukkit.entity.EntityType
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.samu.crackshotRemake.CrackshotRemake
-import org.samu.crackshotRemake.gunsettings.enums.ProjectileTypes
-import org.samu.crackshotRemake.gunsettings.enums.ShotKey
-import org.samu.crackshotRemake.instances.Weapon
+import org.samu.crackshotRemake.weapon.enums.ProjectileTypes
+import org.samu.crackshotRemake.weapon.enums.ShotKey
+import org.samu.crackshotRemake.weapon.instances.Weapon
 import java.io.File
 import java.util.*
 
@@ -53,7 +53,7 @@ object FileManager {
             val itemType = Material.valueOf(itemTypeString)
             val lore = weaponSection.getString("Item_Information.Item_Lore") ?: ""
             val soundAcquired = Sound.valueOf(weaponSection.getString("Item_Information.Sounds_Acquired")!!.split("-")[0])
-            val shotKey:ShotKey = ShotKey.valueOf(weaponSection.getString("Shooting.Shot_KEY"))
+            val shotKey: ShotKey = ShotKey.valueOf(weaponSection.getString("Shooting.Shot_KEY"))
             val itemStack = ItemStack(itemType)
             val meta: ItemMeta = itemStack.itemMeta ?: continue
             meta.displayName = displayName
@@ -73,12 +73,7 @@ object FileManager {
             val reloadAmount = weaponSection.getInt("Reload.Reload_Amount")
             val reloadBulletsIndividually = weaponSection.getBoolean("Reload.Reload_Bullets_Individually")
             val reloadDuration = weaponSection.getInt("Reload.Reload_Duration")
-            val soundsReloading = Sound.valueOf(weaponSection.getString("Reload.Sounds_Reloading")!!.split("-")[0])
-
-            val openDuration = weaponSection.getInt("Firearm_Action.Open_Duration")
-            val closeDuration = weaponSection.getInt("Firearm_Action.Close_Duration")
-            val soundOpen = Sound.valueOf(weaponSection.getString("Firearm_Action.Sound_Open")!!.split("-")[0])
-            val soundClose = Sound.valueOf(weaponSection.getString("Firearm_Action.Sound_Close")!!.split("-")[0])
+            val soundsReloading = weaponSection.getString("Reload.Sounds_Reloading")?.split(",")?.map { Sound.valueOf(it.split("-")[0]) } ?: emptyList()
 
             val resetHitCooldown = weaponSection.getBoolean("Abilities.Reset_Hit_Cooldown")
             val superEffectiveString = weaponSection.getString("Abilities.Super_Effective") ?: ""
@@ -94,9 +89,15 @@ object FileManager {
 
             val hitEventsEnabled = weaponSection.getBoolean("Hit_Events.Enable")
             val soundsShooter = Sound.valueOf(weaponSection.getString("Hit_Events.Sounds_Shooter")!!.split("-")[0])
+            val knockBackTarget : Int = weaponSection.getInt("Abilities.KnockbackTarget")
+            val knockBackSelf : Int = weaponSection.getInt("Abilities.KnockbackSelf")
 
             val scopeEnabled = weaponSection.getBoolean("Scope.Enable")
             val scopeSound = Sound.valueOf(weaponSection.getString("Scope.Sound")!!.split("-")[0])
+
+            val fullAutomaticEnabled = weaponSection.getBoolean("Full_Automatic.Enable")
+            val fullAutomaticFireRate = weaponSection.getInt("Full_Automatic.Fire_Rate")
+            val delayFullAuto = weaponSection.getInt("Full_Automatic.Delay")
 
             val weapon = Weapon(
                 id = UUID.randomUUID(),
@@ -120,18 +121,19 @@ object FileManager {
                 reloadDuration = reloadDuration,
                 soundsReloading = soundsReloading,
                 soundsShoot = soundsShoot,
-                openDuration = openDuration,
-                closeDuration = closeDuration,
-                soundOpen = soundOpen,
-                soundClose = soundClose,
                 resetHitCooldown = resetHitCooldown,
+                knockBackSelf = knockBackSelf,
+                knockBackTarget = knockBackTarget,
                 superEffective = superEffective,
                 particlesEnabled = particlesEnabled,
                 particlePlayerShoot = particlePlayerShoot,
                 hitEventsEnabled = hitEventsEnabled,
                 soundsShooter = soundsShooter,
                 scopeEnabled = scopeEnabled,
-                scopeSound = scopeSound
+                scopeSound = scopeSound,
+                fullAutomaticEnabled = fullAutomaticEnabled,
+                fullAutomaticFireRate = fullAutomaticFireRate,
+                delayFullAuto = delayFullAuto
             )
             CacheManager.addWeapon(weapon)
         }

@@ -11,7 +11,6 @@ Messages:
     gun-not-found: "§cThe weapon §e{gun} §cdoes not exist in the database."
     invalid-quantity: "§cInvalid quantity: §e{quantity}. Please enter a positive number."
     file-error: "§cAn error occurred while accessing the file. Please check the console."
-
   notifications:
     cooldown-active: "§cYour §3{gun} §cis cooling down. Please wait before using it again."
     reload-complete: "§aReload complete! Your §3{gun} §7is ready to fire."

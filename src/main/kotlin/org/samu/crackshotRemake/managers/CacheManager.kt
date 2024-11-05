@@ -1,8 +1,7 @@
 package org.samu.crackshotRemake.managers
 
 import org.bukkit.entity.Player
-import org.samu.crackshotRemake.CrackshotRemake
-import org.samu.crackshotRemake.instances.Weapon
+import org.samu.crackshotRemake.weapon.instances.Weapon
 import java.util.UUID
 
 object CacheManager {

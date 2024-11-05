@@ -3,7 +3,7 @@ Razziatore:
     DisplayName: "§3Razziatore"
     Item_Type: STONE
     Item_Lore: "Arma capace di trapassare tutti i tipi di nemici"
-    Sounds_Acquired: BLOCK_ANVIL_USE
+    Sounds_Acquired: ARROW_HIT
   Shooting:
     Shot_KEY: LEFT_CLICK
     Cancel_Left_Click_Block_Damage: true
@@ -12,28 +12,28 @@ Razziatore:
     Projectile_Type: ENERGY
     Projectile_Subtype: 40-1-NONE-0
     Projectile_Damage: 12
-    Projectile_Speed: 100
-    Sounds_Shoot: BLOCK_ANVIL_USE
+    Projectile_Speed: 4
+    Sounds_Shoot: ARROW_HIT
   Reload:
     Enable: true
     Reload_Amount: 8
     Reload_Bullets_Individually: true
     Reload_Duration: 10
-    Sounds_Reloading: BLOCK_ANVIL_USE
-  Firearm_Action:
-    Open_Duration: 12
-    Close_Duration: 3
-    Sound_Open: BLOCK_ANVIL_USE
-    Sound_Close: BLOCK_ANVIL_USE
+    Sounds_Reloading: ARROW_HIT
   Abilities:
     Reset_Hit_Cooldown: true
     Super_Effective: ZOMBIE-2
+    KnockbackTarget: 10
+    KnockbackSelf: 3
   Particles:
     Enable: true
-    Particle_Player_Shoot: BLOCK_ANVIL_USE
+    Particle_Player_Shoot: ARROW_HIT
   Hit_Events:
     Enable: true
-    Sounds_Shooter: BLOCK_ANVIL_USE
+    Sounds_Shooter: ARROW_HIT
   Scope:
     Enable: true
-    Sound: BLOCK_ANVIL_USE
+    Sound: ARROW_HIT
+  Full_Automatic:
+    Enable: true
+    Fire_Rate: 10

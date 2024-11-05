@@ -4,6 +4,7 @@ import GunManager
 import de.tr7zw.changeme.nbtapi.NBT
 import org.bukkit.plugin.java.JavaPlugin
 import org.samu.crackshotRemake.commands.ShotGet
+import org.samu.crackshotRemake.listener.EntityDamage
 import org.samu.crackshotRemake.listener.InteractEvent
 import org.samu.crackshotRemake.managers.CacheManager
 import org.samu.crackshotRemake.managers.ConfigManager
@@ -21,7 +22,8 @@ class CrackshotRemake : JavaPlugin() {
         FileManager.createWeapons()
         gunManager = GunManager(this)
         getCommand("shot").executor = ShotGet()
-        server.pluginManager.registerEvents(InteractEvent(), this)
+        server.pluginManager.registerEvents(InteractEvent(this), this)
+        server.pluginManager.registerEvents(EntityDamage(this), this)
 
         for (weapon in CacheManager.getAllWeapons()) {
             logger.warning(weapon.name)

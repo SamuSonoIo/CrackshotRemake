@@ -2,7 +2,7 @@ name: CrackshotRemake
 version: '1.0'
 main: org.samu.crackshotRemake.CrackshotRemake
 api-version: '1.18'
-prefix: QuickShot
+prefix: CSRemake
 authors: [SamuSonoIo]
 description: Complete Gun System
 commands:
