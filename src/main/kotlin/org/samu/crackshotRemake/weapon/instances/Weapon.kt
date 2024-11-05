@@ -9,7 +9,7 @@ import org.samu.crackshotRemake.weapon.enums.ShotKey
 import java.util.UUID
 
 class Weapon(
-    val id: UUID,
+    val id: String,
     val itemStack: ItemStack,
     val name: String,
     val displayName: String,

@@ -9,7 +9,7 @@ object CacheManager {
     private var scope:MutableSet<UUID> = mutableSetOf()
 
     fun addWeapon(weapon: Weapon) { weapons.add(weapon) }
-    fun getWeapon(uuid: UUID): Weapon? { return weapons.find { it.id == uuid } }
+    fun getWeapon(id: String): Weapon? { return weapons.find { it.id == id } }
     fun getAllWeapons(): List<Weapon> { return weapons.toList() }
 
     fun setScope(player: Player) { scope.add(player.uniqueId) }

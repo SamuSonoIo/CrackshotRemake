@@ -13,13 +13,13 @@ import org.samu.crackshotRemake.weapon.instances.Weapon
 import java.io.File
 import java.util.*
 
-object FileManager {
+class FileManager(val crackshotRemake: CrackshotRemake) {
     var weaponsfile: File? = null
     var weapons: YamlConfiguration? = null
     var explosivesfile: File? = null
     var explosives: YamlConfiguration? = null
 
-    fun setupFiles(crackshotRemake: CrackshotRemake) {
+    fun setupFiles() {
         if (!crackshotRemake.dataFolder.exists()) {
             crackshotRemake.dataFolder.mkdir()
         }
@@ -100,7 +100,7 @@ object FileManager {
             val delayFullAuto = weaponSection.getInt("Full_Automatic.Delay")
 
             val weapon = Weapon(
-                id = UUID.randomUUID(),
+                id = "nbttag.$name.crackshot",
                 itemStack = itemStack,
                 name = name,
                 displayName = displayName,

@@ -10,14 +10,14 @@ import org.samu.crackshotRemake.managers.shooting.knockback.KnockbackSelf
 import org.samu.crackshotRemake.weapon.enums.ShotKey
 import org.samu.crackshotRemake.weapon.instances.Weapon
 
-object GunShooting {
+class GunShooting(val crackshotRemake: CrackshotRemake) {
     fun shootGun(crackshotRemake: CrackshotRemake, weapon: Weapon, e: PlayerInteractEvent) {
         if (rightInteraction(weapon, e)) {
             val player: Player = e.player
             if (CrackshotRemake.gunManager!!.canUseWeapon(weapon, player)) {
                 LaunchProjectile.shootProjectile(player, weapon)
 
-                CrackshotRemake.gunManager!!.removeAmmo(player, weapon)
+                crackshotRemake.ammoManager?.removeAmmo(player, weapon)
                 SoundManager.playShootSound(weapon, player)
 
                 FullAutomatic.fullAutoCheck(crackshotRemake, weapon, e)

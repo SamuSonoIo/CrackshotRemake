@@ -9,8 +9,19 @@ import org.samu.crackshotRemake.listener.InteractEvent
 import org.samu.crackshotRemake.managers.CacheManager
 import org.samu.crackshotRemake.managers.ConfigManager
 import org.samu.crackshotRemake.managers.FileManager
+import org.samu.crackshotRemake.managers.nbt.AssignNbt
+import org.samu.crackshotRemake.managers.nbt.NbtCheck
+import org.samu.crackshotRemake.managers.shooting.GunShooting
+import org.samu.crackshotRemake.managers.shooting.ammo.AmmoManager
 
 class CrackshotRemake : JavaPlugin() {
+
+    var fileManager: FileManager? = null
+    var ammoManager: AmmoManager? = null
+    var assignNbt: AssignNbt? = null
+    var nbtCheck: NbtCheck? = null
+    var gunShooting:GunShooting? = null
+
     override fun onEnable() {
         if (!NBT.preloadApi()) {
             logger.warning("NBT-API wasn't initialized properly, disabling the plugin")
@@ -18,10 +29,20 @@ class CrackshotRemake : JavaPlugin() {
             return
         }
         ConfigManager.setupConfig(this)
-        FileManager.setupFiles(this)
-        FileManager.createWeapons()
+
+        fileManager = FileManager(this)
+        fileManager!!.setupFiles()
+        fileManager!!.createWeapons()
+
+        ammoManager = AmmoManager(this)
+        assignNbt = AssignNbt()
+        nbtCheck = NbtCheck()
+
+        gunShooting = GunShooting(this)
         gunManager = GunManager(this)
+
         getCommand("shot").executor = ShotGet()
+
         server.pluginManager.registerEvents(InteractEvent(this), this)
         server.pluginManager.registerEvents(EntityDamage(this), this)
 
