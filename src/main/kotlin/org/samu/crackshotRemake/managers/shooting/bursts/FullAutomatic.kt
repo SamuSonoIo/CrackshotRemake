@@ -4,7 +4,6 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.scheduler.BukkitRunnable
 import org.samu.crackshotRemake.CrackshotRemake
 import org.samu.crackshotRemake.managers.SoundManager
-import org.samu.crackshotRemake.managers.shooting.GunShooting.shootGun
 import org.samu.crackshotRemake.managers.shooting.LaunchProjectile
 import org.samu.crackshotRemake.weapon.instances.Weapon
 
@@ -17,13 +16,13 @@ object FullAutomatic {
                 override fun run() {
                     if (CrackshotRemake.gunManager!!.canUseWeapon(weapon, player)) {
                         LaunchProjectile.shootProjectile(player, weapon)
-                        CrackshotRemake.gunManager?.removeAmmo(player, weapon)
+                        crackshotRemake.ammoManager?.removeAmmo(player, weapon)
                         SoundManager.playShootSound(weapon, player)
                         object : BukkitRunnable() {
                             override fun run() {
                                 if (CrackshotRemake.gunManager!!.canUseWeapon(weapon, player)) {
                                     LaunchProjectile.shootProjectile(player, weapon)
-                                    CrackshotRemake.gunManager?.removeAmmo(player, weapon)
+                                    crackshotRemake.ammoManager?.removeAmmo(player, weapon)
                                     SoundManager.playShootSound(weapon, player)
 
                                     if (weapon.projectilsCurrentAmount <= 0) {
@@ -40,7 +39,7 @@ object FullAutomatic {
                 }
             }.runTaskLater(crackshotRemake, weapon.delayFullAuto.toLong())
         } else {
-            shootGun(crackshotRemake, weapon, e)
+            crackshotRemake.gunShooting?.shootGun(crackshotRemake, weapon, e)
         }
     }
 

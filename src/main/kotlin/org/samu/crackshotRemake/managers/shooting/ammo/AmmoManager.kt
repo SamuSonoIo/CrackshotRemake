@@ -11,7 +11,7 @@ class AmmoManager(val crackshotRemake: CrackshotRemake) {
     fun removeAmmo(player: Player, weapon: Weapon) {
         if (weapon.projectilsCurrentAmount > 0) {
             weapon.projectilsCurrentAmount -= 1
-            player.sendMessage("Current ammo: $weapon.projectilsCurrentAmount")
+            player.sendMessage("Current ammo: " + weapon.projectilsCurrentAmount.toString())
         } else{
             startReloading(player, weapon)
         }
@@ -19,7 +19,7 @@ class AmmoManager(val crackshotRemake: CrackshotRemake) {
 
     fun startReloading(player: Player, weapon: Weapon) {
         val reloadTicks = weapon.reloadDuration * 20L
-
+        SoundManager.playReloadSound(weapon, player)
         object : BukkitRunnable() {
             var ticks = 0L
 
@@ -28,8 +28,6 @@ class AmmoManager(val crackshotRemake: CrackshotRemake) {
                     weapon.projectilsCurrentAmount = weapon.projectileAmount
                     player.sendMessage("Ricarica completata!")
                     cancel()
-                } else {
-                    SoundManager.playReloadSound(weapon, player)
                 }
                 ticks += 20L
             }
