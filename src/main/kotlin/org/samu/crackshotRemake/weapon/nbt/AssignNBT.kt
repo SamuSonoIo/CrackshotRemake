@@ -1,10 +1,10 @@
-package org.samu.crackshotRemake.managers.nbt
+package org.samu.crackshotRemake.weapon.nbt
 
 import de.tr7zw.changeme.nbtapi.NBTItem
 import org.bukkit.inventory.ItemStack
 import org.samu.crackshotRemake.weapon.instances.Weapon
 
-class AssignNbt {
+class AssignNBT {
     fun setWeaponNBT(weapon: Weapon): ItemStack {
         val weaponItem = weapon.itemStack.clone()
         val nbtItem = NBTItem(weaponItem)

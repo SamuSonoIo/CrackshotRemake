@@ -1,4 +1,4 @@
-package org.samu.crackshotRemake.managers.shooting.knockback
+package org.samu.crackshotRemake.weapon.shooting.knockback
 
 import org.bukkit.entity.Player
 import org.bukkit.util.Vector

@@ -12,11 +12,4 @@ object ConfigManager {
         config!!.options().copyDefaults(true)
         crackshotRemake.saveDefaultConfig()
     }
-
-    fun getMessageError(path:String):String {
-        return config!!.getString("Prefix") + config!!.getString("Messages.error.$path")
-    }
-    fun getMessageSuccess(path:String):String {
-        return config!!.getString("Prefix") + config!!.getString("Messages.success.$path")
-    }
 }

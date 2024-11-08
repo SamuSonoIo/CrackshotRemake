@@ -1,4 +1,4 @@
-package org.samu.crackshotRemake.managers.shooting
+package org.samu.crackshotRemake.weapon.shooting
 
 import org.bukkit.entity.*
 import org.samu.crackshotRemake.weapon.enums.ProjectileTypes

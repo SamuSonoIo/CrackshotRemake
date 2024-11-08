@@ -1,10 +1,9 @@
-package org.samu.crackshotRemake.managers.shooting.ammo
+package org.samu.crackshotRemake.weapon.shooting.ammo
 
-import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
 import org.samu.crackshotRemake.CrackshotRemake
-import org.samu.crackshotRemake.managers.SoundManager
+import org.samu.crackshotRemake.util.SoundUtil
 import org.samu.crackshotRemake.weapon.instances.Weapon
 
 class AmmoManager(val crackshotRemake: CrackshotRemake) {
@@ -19,7 +18,7 @@ class AmmoManager(val crackshotRemake: CrackshotRemake) {
 
     fun startReloading(player: Player, weapon: Weapon) {
         val reloadTicks = weapon.reloadDuration * 20L
-        SoundManager.playReloadSound(weapon, player)
+        SoundUtil.playReloadSound(weapon, player)
         object : BukkitRunnable() {
             var ticks = 0L
 

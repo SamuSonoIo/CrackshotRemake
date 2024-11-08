@@ -1,31 +1,31 @@
-package org.samu.crackshotRemake.managers.shooting
+package org.samu.crackshotRemake.weapon.shooting
 
 import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 import org.samu.crackshotRemake.CrackshotRemake
-import org.samu.crackshotRemake.managers.SoundManager
-import org.samu.crackshotRemake.managers.shooting.bursts.FullAutomatic
-import org.samu.crackshotRemake.managers.shooting.knockback.KnockbackSelf
+import org.samu.crackshotRemake.managers.ClassLoader
+import org.samu.crackshotRemake.weapon.shooting.knockback.KnockbackSelf
+import org.samu.crackshotRemake.util.SoundUtil
 import org.samu.crackshotRemake.weapon.enums.ShotKey
 import org.samu.crackshotRemake.weapon.instances.Weapon
 
-class GunShooting(val crackshotRemake: CrackshotRemake) {
-    fun shootGun(crackshotRemake: CrackshotRemake, weapon: Weapon, e: PlayerInteractEvent) {
+class GunShooting() {
+    fun shootGun(weapon: Weapon, e: PlayerInteractEvent) {
         if (rightInteraction(weapon, e)) {
             val player: Player = e.player
-            if (CrackshotRemake.gunManager!!.canUseWeapon(weapon, player)) {
+            if (ClassLoader.gunManager!!.canUseWeapon(weapon, player)) {
                 LaunchProjectile.shootProjectile(player, weapon)
 
-                crackshotRemake.ammoManager?.removeAmmo(player, weapon)
-                SoundManager.playShootSound(weapon, player)
+                CrackshotRemake.classLoader?.ammoManager?.removeAmmo(player, weapon)
+                SoundUtil.playShootSound(weapon, player)
 
-                FullAutomatic.fullAutoCheck(crackshotRemake, weapon, e)
+                CrackshotRemake.classLoader?.fullAutomatic?.shootAutomaticFullAuto(weapon, e)
                 KnockbackSelf.giveKnockback(player, weapon)
             }
 
             if (e.action == Action.LEFT_CLICK_BLOCK || e.action == Action.LEFT_CLICK_AIR) {
-                CrackshotRemake.gunManager?.toggleScope(player, weapon)
+                ClassLoader.gunManager!!.toggleScope(player, weapon)
             }
         }
     }
