@@ -27,7 +27,7 @@ class ClassLoader(val crackshotRemake: CrackshotRemake) {
             crackshotRemake.pluginLoader.disablePlugin(crackshotRemake)
         } else {
             ConfigManager.setupConfig(crackshotRemake)
-            fileManager = FileManager(crackshotRemake).apply {
+            fileManager = FileManager().apply {
                 setupFiles()
                 createWeapons()
             }
