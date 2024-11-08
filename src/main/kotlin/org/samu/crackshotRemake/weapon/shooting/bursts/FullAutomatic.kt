@@ -3,9 +3,11 @@ package org.samu.crackshotRemake.weapon.shooting.bursts
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.scheduler.BukkitRunnable
 import org.samu.crackshotRemake.CrackshotRemake
+import org.samu.crackshotRemake.managers.ClassLoader
 import org.samu.crackshotRemake.weapon.instances.Weapon
 
-class FullAutomatic(val crackshotRemake: CrackshotRemake) {
+class FullAutomatic() {
+    var crackshotRemake:CrackshotRemake = ClassLoader.crackshotRemake!!
     fun shootAutomaticFullAuto(weapon: Weapon, e: PlayerInteractEvent) {
         if (weapon.fullAutomaticEnabled) {
             val fireRate = weapon.fullAutomaticFireRate

@@ -3,10 +3,12 @@ package org.samu.crackshotRemake.weapon.shooting.ammo
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
 import org.samu.crackshotRemake.CrackshotRemake
+import org.samu.crackshotRemake.managers.ClassLoader
 import org.samu.crackshotRemake.util.SoundUtil
 import org.samu.crackshotRemake.weapon.instances.Weapon
 
-class AmmoManager(val crackshotRemake: CrackshotRemake) {
+class AmmoManager() {
+    val crackshotRemake:CrackshotRemake = ClassLoader.crackshotRemake!!
     fun removeAmmo(player: Player, weapon: Weapon) {
         if (weapon.projectilsCurrentAmount > 0) {
             weapon.projectilsCurrentAmount -= 1

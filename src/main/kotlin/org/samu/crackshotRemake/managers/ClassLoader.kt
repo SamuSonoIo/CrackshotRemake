@@ -31,18 +31,18 @@ class ClassLoader(val crackshotRemake: CrackshotRemake) {
                 setupFiles()
                 createWeapons()
             }
-            ammoManager = AmmoManager(crackshotRemake)
+            ammoManager = AmmoManager()
             assignNbt = AssignNBT()
             nbtCheck = CheckNBT()
             gunShooting = GunShooting()
             gunManager = GunManager()
-            fullAutomatic = FullAutomatic(crackshotRemake)
+            fullAutomatic = FullAutomatic()
 
             crackshotRemake.getCommand("shot").executor = ShotGet()
             crackshotRemake.server.pluginManager.registerEvents(InteractEvent(), crackshotRemake)
             crackshotRemake.server.pluginManager.registerEvents(EntityDamage(), crackshotRemake)
 
-            crackshotRemake.logger.warning("CLASSLOADER LOADED SUCCESSFULLY!")
+            crackshotRemake.logger.warning("ClassLoader loaded!")
         }
     }
 
