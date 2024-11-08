@@ -20,7 +20,7 @@ class FullAutomatic(val crackshotRemake: CrackshotRemake) {
                         CrackshotRemake.classLoader?.gunShooting?.shootGun(weapon, e)
                         weapon.projectilsCurrentAmount--
                         shotsFired++
-                        player.sendMessage("Full Auto caleed, current shots $shotsFired, Current Projectiles: ${weapon.projectilsCurrentAmount}")
+                        player.sendMessage("Full Auto called, current shots $shotsFired, Current Projectiles: ${weapon.projectilsCurrentAmount}")
                     }
                 }
             }.runTaskTimer(crackshotRemake, 53L, 53L)

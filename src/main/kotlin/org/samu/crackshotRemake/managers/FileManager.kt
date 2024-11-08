@@ -13,13 +13,15 @@ import org.samu.crackshotRemake.weapon.instances.Weapon
 import java.io.File
 import java.util.*
 
-class FileManager(val crackshotRemake: CrackshotRemake) {
+class FileManager() {
+    lateinit var crackshotRemake: CrackshotRemake
     var weaponsfile: File? = null
     var weapons: YamlConfiguration? = null
     var explosivesfile: File? = null
     var explosives: YamlConfiguration? = null
 
     fun setupFiles() {
+        crackshotRemake = ClassLoader.crackshotRemake!!
         if (!crackshotRemake.dataFolder.exists()) {
             crackshotRemake.dataFolder.mkdir()
         }
@@ -57,7 +59,8 @@ class FileManager(val crackshotRemake: CrackshotRemake) {
             val itemStack = ItemStack(itemType)
             val meta: ItemMeta = itemStack.itemMeta ?: continue
             meta.displayName = displayName
-            meta.lore = ArrayList<String>().apply { lore }
+            meta.lore = ArrayList()
+            meta.lore.add(lore)
 
             itemStack.itemMeta = meta
             val cancelLeftClickBlockDamage = weaponSection.getBoolean("Shooting.Cancel_Left_Click_Block_Damage")
